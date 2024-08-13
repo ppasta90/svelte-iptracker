@@ -13,7 +13,7 @@
 </div>
 
 <style>
-    .data-item {
-      flex: 1 0 50%;
-    }
+  .data-item {
+    flex: 1 0 50%;
+  }
 </style>

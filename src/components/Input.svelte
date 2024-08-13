@@ -1,26 +1,33 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-
-  const dispatch = createEventDispatcher();
+  import type { IpData } from "../types/types";
+  const dispatch = createEventDispatcher<{
+    ipDataUpdated: IpData;
+  }>();
 
   let inputValue = "";
 
-  const handleInput = (event) => {
-    inputValue = event.target.value;
+  const handleInput = (event: Event): void => {
+    const target = event.target as HTMLInputElement;
+    inputValue = target.value;
   };
 
-  const handleKeydown = (event) => {
+  const handleKeydown = (event: KeyboardEvent): void => {
     if (event.key === "Enter") {
       fetchIpData();
     }
   };
 
-  const fetchIpData = async () => {
-    const response = await fetch(
-      `https://geo.ipify.org/api/v1?apiKey=${import.meta.env.VITE_GEOIPIFY_API_KEY}&ipAddress=${inputValue}`
-    );
-    const data = await response.json();
-    dispatch("ipDataUpdated", data);
+  const fetchIpData = async (): Promise<void> => {
+    try {
+      const response = await fetch(
+        `https://geo.ipify.org/api/v1?apiKey=${import.meta.env.VITE_GEOIPIFY_API_KEY}&ipAddress=${inputValue}`
+      );
+      const data = await response.json();
+      dispatch("ipDataUpdated", data);
+    } catch (error) {
+      console.error("Error fetching IP data:", error);
+    }
   };
 </script>
 
@@ -29,11 +36,12 @@
     <input
       type="text"
       placeholder="Search for any IP address or domain"
-      on:change={handleInput}
+      on:input={handleInput}
       on:keydown={handleKeydown}
+      value={inputValue}
     />
+    <button type="submit">Search</button>
   </form>
-  <button type="submit"> Search </button>
 </section>
 
 <style>
@@ -46,7 +54,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
     width: 100%;
   }
   input {

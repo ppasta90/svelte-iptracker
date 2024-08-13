@@ -1,7 +1,7 @@
 <script lang="ts">
+  import type { IpData, ipDataSubset } from "../types/types";
   import DataItem from "./DataItem.svelte";
-  export let ipData: any = {};
-  console.log("ipData in Databox", ipData);
+  export let ipData: IpData | ipDataSubset | {};
 </script>
 
 <section id="databox-section">
@@ -11,7 +11,6 @@
   {#each Object.entries(ipData) as [title, content]}
     <DataItem {title} {content} />
   {/each}
- 
 </section>
 
 <style>
