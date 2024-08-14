@@ -3,8 +3,8 @@
   import Databox from "./components/Databox.svelte";
   import Map from "./components/Map.svelte";
   import type { IpData } from "./types/types";
-
-  let ipData: IpData;
+  //@ts-ignore
+  let ipData: IpData = {};
 
   function handleIpData(event: CustomEvent<IpData>) {
     ipData = event.detail;
