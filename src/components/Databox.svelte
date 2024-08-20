@@ -22,5 +22,6 @@
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 1rem;
+    max-width: 100%;
   }
 </style>

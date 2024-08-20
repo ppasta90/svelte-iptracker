@@ -40,7 +40,7 @@
       on:keydown={handleKeydown}
       value={inputValue}
     />
-    <button type="submit">Search</button>
+    <button type="submit">GO!</button>
   </form>
 </section>
 
@@ -49,12 +49,14 @@
     display: flex;
     justify-content: center;
     margin-bottom: 2rem;
+    width: 100%;
   }
   form {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
+    gap: 1em;
   }
   input {
     max-width: 1440px;
@@ -71,6 +73,6 @@
     background-color: #000;
     color: #fff;
     cursor: pointer;
-    margin-left: 1em;
+    padding: 1em;
   }
 </style>
