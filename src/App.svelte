@@ -3,6 +3,8 @@
   import Databox from "./components/Databox.svelte";
   import Map from "./components/Map.svelte";
   import type { IpData } from "./types/types";
+  import type { LngLatLike } from "svelte-maplibre";
+
   import WelcomeDialog from "./components/WelcomeDialog.svelte";
   //@ts-ignore
   let ipData: IpData = {};
@@ -15,10 +17,10 @@
   // derive a new state with only some properties of ipdata
   $: ipDataSubset = ipData.ip
     ? {
-        ip: ipData.ip,
-        isp: ipData.isp,
+        city: ipData.location.city,
         country: ipData.location.country,
         region: ipData.location.region,
+        coordinates: [ipData.location.lng, ipData.location.lat] as LngLatLike,
       }
     : {};
 </script>
@@ -36,7 +38,7 @@
   <h1>Svelte IP Tracker</h1>
   <Input on:ipDataUpdated={handleIpData} />
   <Databox ipData={ipDataSubset} />
-  <Map />
+  <Map coordinates={ipDataSubset.coordinates} />
 </main>
 
 <style>

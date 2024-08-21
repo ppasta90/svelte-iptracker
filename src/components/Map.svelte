@@ -1,11 +1,14 @@
-<script>
+<script lang="ts">
+  import type { LngLatLike } from "svelte-maplibre";
+
   // @ts-ignore
   import { MapLibre } from "svelte-maplibre";
+  export let coordinates: LngLatLike = [0,0]; //get user location if possible
 </script>
 
 <MapLibre
-  center={[50, 20]}
-  zoom={7}
+  center={coordinates}
+  zoom={5}
   class="map"
   standardControls
   style="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"

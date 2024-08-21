@@ -2,6 +2,11 @@
   import type { IpData, ipDataSubset } from "../types/types";
   import DataItem from "./DataItem.svelte";
   export let ipData: IpData | ipDataSubset | {};
+  const capitalizeFirstLetter = (string: string) => {
+    if (typeof string !== "string") return "";
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
 </script>
 
 <section id="databox-section">
@@ -9,7 +14,7 @@
     <p>Enter an IP address to get started</p>
   {/if}
   {#each Object.entries(ipData) as [title, content]}
-    <DataItem {title} {content} />
+    <DataItem title={capitalizeFirstLetter(title)} {content} />
   {/each}
 </section>
 
